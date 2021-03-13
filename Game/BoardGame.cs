@@ -5,29 +5,31 @@ namespace Game
 {
     public class BoardGame
     {
-        public void PlayGame()
+        public static (int, int, Direction) PlayGame(IConsoleWrapper console)
         {
             var position = (X:0, Y:0, Direction: Direction.North);
             
             Console.WriteLine("Game start!");
             Console.WriteLine($"Current position is: {position.X},{position.Y} {position.Direction}");
+            
+            ConsoleKeyInfo key;
 
-            while (true)
+            do
             {
-                var input = Console.ReadKey(true);
-                switch (input.KeyChar)
+                key = console.ReadKey();
+                switch (key.Key)
                 {
-                    case 'r':
+                    case ConsoleKey.R:
                         position.Direction = position.Direction == Direction.West 
                             ? Direction.North 
                             : Direction.East;
                         break;
-                    case 'l':
+                    case ConsoleKey.L:
                         position.Direction = position.Direction == Direction.East 
                             ? Direction.North 
                             : Direction.West;
                         break;
-                    case 'm':
+                    case ConsoleKey.M:
                         switch (position.Direction)
                         {
                             case Direction.North:
@@ -48,15 +50,14 @@ namespace Game
                                     position.X--;
                                 }
                                 break;
-                            default:
-                                throw new ArgumentOutOfRangeException();
                         }
                         break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(input.KeyChar), input.KeyChar, null);
                 }
                 Console.WriteLine($"Current position is: {position.X},{position.Y} {position.Direction}");
             }
+            while (key.Key != ConsoleKey.Enter);
+
+            return position;
         }
     }
 }
