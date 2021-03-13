@@ -32,8 +32,8 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+/Game.Tests/obj/
+/Game/obj/
 
 # Visual Studio 2015
 .vs/
-/Game.Tests/obj/
-/Game/obj/
