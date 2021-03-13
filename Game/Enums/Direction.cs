@@ -4,6 +4,7 @@ namespace Game.Enums
     {
         East,
         West,
-        North
+        North,
+        South
     }
 }
