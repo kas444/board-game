@@ -6,8 +6,8 @@ namespace Game.Actions
     {
         public Direction TurnRight(Direction direction);
         public Direction TurnLeft(Direction direction);
-        public (int, int, Direction) MoveUp(int x, int y, Direction direction);
-        public (int, int, Direction) MoveDown(int x, int y, Direction direction);
+        public (int, int, Direction) MoveUp((int x, int y, Direction direction) position);
+        public (int, int, Direction) MoveDown((int x, int y, Direction direction) position);
     }
     
     public class ActionFacade : IActionFacade
@@ -31,12 +31,12 @@ namespace Game.Actions
             return _turn.TurnLeft(direction);
         }
         
-        public (int, int, Direction) MoveUp(int x, int y, Direction direction)
+        public (int, int, Direction) MoveUp((int x, int y, Direction direction) position)
         {
-            return _move.MoveUp(x, y, direction);
+            return _move.MoveUp(position);
         }
 
-        public (int, int, Direction) MoveDown(int x, int y, Direction direction)
+        public (int, int, Direction) MoveDown((int x, int y, Direction direction) position)
         {
             throw new System.NotImplementedException();
         }
