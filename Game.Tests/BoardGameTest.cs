@@ -7,6 +7,19 @@ namespace Game.Tests
 {
     public class BoardGameTest
     {
+        private BoardGame _boardGame;
+        private Turn _turn;
+        private Move _move;
+        private ActionFacade _actionFacadeMock;
+    
+        [SetUp]
+        public void SetUp()
+        {
+            _turn = new Turn();
+            _move = new Move();
+            _actionFacadeMock = new ActionFacade(_turn, _move);
+        }
+        
         [Test]
         public void TestMoving_MMMMM()
         {
@@ -19,13 +32,16 @@ namespace Game.Tests
                 ConsoleKey.M,
                 ConsoleKey.Enter
             });
+            
+            _boardGame = new BoardGame(stub, _actionFacadeMock);
 
-            var result = BoardGame.PlayGame(stub);
+            var result = _boardGame.PlayGame(0, 0, Direction.North);
             
             var expectedPosition = (0, 4, Direction.North);
             
-            Assert.AreEqual(result, expectedPosition);
+            Assert.AreEqual(expectedPosition, result);
         }
+        
         [Test]
         public void TestMoving_RMMMLMM()
         {
@@ -41,12 +57,15 @@ namespace Game.Tests
                 ConsoleKey.Enter
             });
 
-            var result = BoardGame.PlayGame(stub);
+            _boardGame = new BoardGame(stub, _actionFacadeMock);
+
+            var result = _boardGame.PlayGame(0, 0, Direction.North);
             
             var expectedPosition = (3, 2, Direction.North);
             
-            Assert.AreEqual(result, expectedPosition);
+            Assert.AreEqual(expectedPosition, result);
         }
+        
         [Test]
         public void TestMoving_MRMLMRM()
         {
@@ -62,12 +81,15 @@ namespace Game.Tests
                 ConsoleKey.Enter
             });
 
-            var result = BoardGame.PlayGame(stub);
+            _boardGame = new BoardGame(stub, _actionFacadeMock);
+
+            var result = _boardGame.PlayGame(0, 0, Direction.North);
             
             var expectedPosition = (2, 2, Direction.East);
             
-            Assert.AreEqual(result, expectedPosition);
+            Assert.AreEqual(expectedPosition, result);
         }
+        
         [Test]
         public void TestMoving_MRMLMRMLLM()
         {
@@ -86,11 +108,13 @@ namespace Game.Tests
                 ConsoleKey.Enter
             });
 
-            var result = BoardGame.PlayGame(stub);
+            _boardGame = new BoardGame(stub, _actionFacadeMock);
+
+            var result = _boardGame.PlayGame(0, 0, Direction.North);
             
             var expectedPosition = (1, 2, Direction.West);
             
-            Assert.AreEqual(result, expectedPosition);
+            Assert.AreEqual(expectedPosition, result);
         }
     }
 }

@@ -5,9 +5,21 @@ namespace Game
 {
     public class BoardGame
     {
-        public static (int, int, Direction) PlayGame(IConsoleWrapper console)
+        private readonly IConsoleWrapper _consoleWrapper;
+        private readonly IActionFacade _action;
+
+        public BoardGame(
+            IConsoleWrapper consoleWrapper,
+            IActionFacade action
+            )
         {
-            var position = (X:0, Y:0, Direction: Direction.North);
+            _consoleWrapper = consoleWrapper;
+            _action = action;
+        }
+
+        public (int, int, Direction) PlayGame(int x, int y, Direction direction)
+        {
+            var position = (X:x, Y:y, Direction: direction);
             
             Console.WriteLine("Game start!");
             Console.WriteLine($"Current position is: {position.X},{position.Y} {position.Direction}");
@@ -16,47 +28,23 @@ namespace Game
 
             do
             {
-                key = console.ReadKey();
+                key = _consoleWrapper.ReadKey();
                 switch (key.Key)
                 {
                     case ConsoleKey.R:
-                        position.Direction = position.Direction == Direction.West 
-                            ? Direction.North 
-                            : Direction.East;
+                        position.Direction = _action.TurnRight(position.Direction);
                         break;
                     case ConsoleKey.L:
-                        position.Direction = position.Direction == Direction.East 
-                            ? Direction.North 
-                            : Direction.West;
+                        position.Direction = _action.TurnLeft(position.Direction);
                         break;
                     case ConsoleKey.M:
-                        switch (position.Direction)
-                        {
-                            case Direction.North:
-                                if (position.Y < 4)
-                                {
-                                    position.Y++;
-                                }
-                                break;
-                            case Direction.East:
-                                if (position.X < 4)
-                                {
-                                    position.X++;
-                                }
-                                break;
-                            case Direction.West:
-                                if (position.X > 0)
-                                {
-                                    position.X--;
-                                }
-                                break;
-                        }
+                        position = _action.MoveUp(position.X, position.Y, position.Direction);
                         break;
                 }
                 Console.WriteLine($"Current position is: {position.X},{position.Y} {position.Direction}");
             }
             while (key.Key != ConsoleKey.Enter);
-
+            
             return position;
         }
     }

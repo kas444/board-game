@@ -5,8 +5,8 @@ namespace Game.Tests
 {
     public class ConsoleWrapperStub : IConsoleWrapper
     {
-        private IList<ConsoleKey> _keyCollection;
-        private int _keyIndex = 0;
+        private readonly IList<ConsoleKey> _keyCollection;
+        private int _keyIndex;
 
         public ConsoleWrapperStub(IList<ConsoleKey> keyCollection)
         {
