@@ -1,12 +1,11 @@
-﻿using System;
-
-namespace Game
+﻿namespace Game
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BoardGame game = new BoardGame();
+            game.PlayGame();
         }
     }
 }
