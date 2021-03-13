@@ -1,7 +1,8 @@
 using System;
+using System.Configuration;
 using Game.Enums;
 
-namespace Game
+namespace Game.Actions
 {
     public interface IMove
     {
@@ -14,23 +15,26 @@ namespace Game
         public (int, int, Direction) MoveUp(int x, int y, Direction direction)
         {
             var position = (X:x, Y:y, Direction:direction);
+            var minX = int.Parse(ConfigurationManager.AppSettings["BoardSizeMinX"]);
+            var maxX = int.Parse(ConfigurationManager.AppSettings["BoardSizeMaxX"]);
+            var maxY = int.Parse(ConfigurationManager.AppSettings["BoardSizeMaxY"]);
             
             switch (position.Direction)
             {
                 case Direction.North:
-                    if (position.Y < 4)
+                    if (position.Y < maxY)
                     {
                         position.Y++;
                     }
                     break;
                 case Direction.East:
-                    if (position.X < 4)
+                    if (position.X < maxX)
                     {
                         position.X++;
                     }
                     break;
                 case Direction.West:
-                    if (position.X > 0)
+                    if (position.X > minX)
                     {
                         position.X--;
                     }

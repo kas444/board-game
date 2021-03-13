@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using Game.Actions;
 using Game.Enums;
+using Moq;
 using NUnit.Framework;
 
 namespace Game.Tests
@@ -8,16 +11,20 @@ namespace Game.Tests
     public class BoardGameTest
     {
         private BoardGame _boardGame;
-        private Turn _turn;
-        private Move _move;
+        private Mock<Turn> _turn;
+        private Mock<Move> _move;
         private ActionFacade _actionFacadeMock;
     
         [SetUp]
         public void SetUp()
         {
-            _turn = new Turn();
-            _move = new Move();
-            _actionFacadeMock = new ActionFacade(_turn, _move);
+            _turn = new Mock<Turn>();
+            _move = new Mock<Move>();
+            _actionFacadeMock = new ActionFacade(_turn.Object, _move.Object);
+            
+            ConfigurationManager.AppSettings["BoardSizeMinX"] = "0";
+            ConfigurationManager.AppSettings["BoardSizeMaxX"] = "4";
+            ConfigurationManager.AppSettings["BoardSizeMaxY"] = "4";
         }
         
         [Test]
@@ -34,7 +41,7 @@ namespace Game.Tests
             });
             
             _boardGame = new BoardGame(stub, _actionFacadeMock);
-
+            
             var result = _boardGame.PlayGame(0, 0, Direction.North);
             
             var expectedPosition = (0, 4, Direction.North);

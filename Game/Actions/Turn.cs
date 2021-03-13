@@ -1,6 +1,6 @@
 using Game.Enums;
 
-namespace Game
+namespace Game.Actions
 {
     public interface ITurn
     {

@@ -1,4 +1,6 @@
-﻿using Game.Enums;
+﻿using System;
+using Game.Actions;
+using Game.Enums;
 
 namespace Game
 {
@@ -11,7 +13,7 @@ namespace Game
             var move = new Move();
             var action = new ActionFacade(turn, move);
             var game = new BoardGame(console, action);
-
+            
             game.PlayGame(0,0, Direction.North);
         }
     }
