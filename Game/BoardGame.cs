@@ -39,7 +39,7 @@ namespace Game
                         position.Direction = _action.TurnLeft(position.Direction);
                         break;
                     case ConsoleKey.M:
-                        position = _action.MoveUp(position);
+                        position = _action.MoveForward(position);
                         break;
                 }
                 Console.WriteLine($"Current position is: {position.X},{position.Y} {position.Direction}");

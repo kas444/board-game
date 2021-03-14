@@ -1,23 +1,33 @@
+using System.Collections.Generic;
+using System.Linq;
 using Game.Enums;
 
 namespace Game.Actions
 {
     public interface ITurn
     {
-        Direction TurnRight(Direction direction);
-        Direction TurnLeft(Direction direction);
+        Direction ChangeDirection(Direction direction, char rotate);
     }
     
     public class Turn : ITurn
     {
-        public Direction TurnRight(Direction direction)
-        {
-            return direction == Direction.West ? Direction.North : Direction.East;
-        }
+        private readonly List<Direction> _direction = new List<Direction>() {Direction.North, Direction.East, Direction.South, Direction.West};
 
-        public Direction TurnLeft(Direction direction)
+        public Direction ChangeDirection(Direction direction, char rotate)
         {
-            return direction  == Direction.East ? Direction.North : Direction.West;
+            var length = _direction.Count;
+            var index = _direction.IndexOf(direction);
+
+            if (rotate == 'R')
+            {
+                if (index >= length-1) return _direction.First();
+                index++;
+                return _direction[index];
+            }
+            
+            if (index == 0) return _direction.Last();
+            index--;
+            return _direction[index];
         }
     }
 }

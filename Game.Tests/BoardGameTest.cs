@@ -24,6 +24,7 @@ namespace Game.Tests
             
             ConfigurationManager.AppSettings["BoardSizeMinX"] = "0";
             ConfigurationManager.AppSettings["BoardSizeMaxX"] = "4";
+            ConfigurationManager.AppSettings["BoardSizeMinY"] = "0";
             ConfigurationManager.AppSettings["BoardSizeMaxY"] = "4";
         }
         

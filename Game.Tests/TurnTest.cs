@@ -7,6 +7,8 @@ namespace Game.Tests
     public class TurnTest
     {
         private Turn _turn;
+        private const char R = 'R';
+        private const char L = 'L';
     
         [SetUp]
         public void SetUp()
@@ -17,25 +19,65 @@ namespace Game.Tests
         [Test]
         public void TestTurnRight_West_To_North()
         {
-            var direction = _turn.TurnRight(Direction.West);
+            var direction = _turn.ChangeDirection(Direction.West, R);
             
-            Assert.AreEqual(direction, Direction.North);
+            Assert.AreEqual(Direction.North, direction);
         }
         
         [Test]
         public void TestTurnRight_North_To_East()
         {
-            var direction = _turn.TurnRight(Direction.North);
+            var direction = _turn.ChangeDirection(Direction.North, R);
             
-            Assert.AreEqual(direction, Direction.East);
+            Assert.AreEqual(Direction.East, direction);
         }
         
         [Test]
-        public void TestTurnRight_East_To_East()
+        public void TestTurnRight_East_To_South()
         {
-            var direction = _turn.TurnRight(Direction.East);
+            var direction = _turn.ChangeDirection(Direction.East, R);
             
-            Assert.AreEqual(direction, Direction.East);
+            Assert.AreEqual(Direction.South, direction);
+        }
+        
+        [Test]
+        public void TestTurnRight_South_To_West()
+        {
+            var direction = _turn.ChangeDirection(Direction.South, R);
+            
+            Assert.AreEqual(Direction.West, direction);
+        }
+        
+        [Test]
+        public void TestTurnLeft_West_To_South()
+        {
+            var direction = _turn.ChangeDirection(Direction.West, L);
+            
+            Assert.AreEqual(Direction.South, direction);
+        }
+        
+        [Test]
+        public void TestTurnLeft_North_To_West()
+        {
+            var direction = _turn.ChangeDirection(Direction.North, L);
+            
+            Assert.AreEqual(Direction.West, direction);
+        }
+        
+        [Test]
+        public void TestTurnLeft_East_To_North()
+        {
+            var direction = _turn.ChangeDirection(Direction.East, L);
+            
+            Assert.AreEqual(Direction.North, direction);
+        }
+        
+        [Test]
+        public void TestTurnLeft_South_To_East()
+        {
+            var direction = _turn.ChangeDirection(Direction.South, L);
+            
+            Assert.AreEqual(Direction.East, direction);
         }
     }
 }
