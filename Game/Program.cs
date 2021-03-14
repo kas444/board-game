@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Game.Actions;
 using Game.Enums;
 
@@ -14,7 +15,11 @@ namespace Game
             var action = new ActionFacade(turn, move);
             var game = new BoardGame(console, action);
             
-            game.PlayGame(0,0, Direction.North);
+            var minX = int.Parse(ConfigurationManager.AppSettings["StartingAtX"]);
+            var minY = int.Parse(ConfigurationManager.AppSettings["StartingAtY"]);
+            var direction = Enum.Parse<Direction>(ConfigurationManager.AppSettings["StartingDirection"]);
+            
+            game.PlayGame(minX, minY, direction);
         }
     }
 }

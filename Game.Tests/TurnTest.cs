@@ -7,8 +7,8 @@ namespace Game.Tests
     public class TurnTest
     {
         private Turn _turn;
-        private const char R = 'R';
-        private const char L = 'L';
+        private const int R = 1;
+        private const int L = -1;
     
         [SetUp]
         public void SetUp()

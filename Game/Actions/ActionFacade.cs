@@ -22,12 +22,12 @@ namespace Game.Actions
 
         public Direction TurnRight(Direction direction)
         {
-            return _turn.ChangeDirection(direction, 'R');
+            return _turn.ChangeDirection(direction, 1);
         }
         
         public Direction TurnLeft(Direction direction)
         {
-            return _turn.ChangeDirection(direction, 'L');
+            return _turn.ChangeDirection(direction, -1);
         }
         
         public (int, int, Direction) MoveForward((int x, int y, Direction direction) position)
